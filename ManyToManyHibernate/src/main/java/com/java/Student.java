@@ -1,0 +1,90 @@
+package com.java;
+
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="hibernatestudent")
+public class Student {
+@Id
+@Column(name="student_id")
+	private int sid;
+@Column(length=30)
+	private String sname;
+@Column(length=30)
+    private String smobile;
+
+@ManyToMany
+    private Set<Course>courselist;
+@JoinTable(
+		name="hiberstudent_course",
+		joinColumns = {
+			@JoinColumn(name="stud_id",referencedColumnName="student_id")	
+		},
+		inverseJoinColumns = {
+				@JoinColumn(name="course_id",referencedColumnName = "course_id")
+		}
+	)
+
+   
+
+	public int getSid() {
+		return sid;
+	}
+
+	public void setSid(int sid) {
+		this.sid = sid;
+	}
+
+	public String getSname() {
+		return sname;
+	}
+
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+
+	public String getSmobile() {
+		return smobile;
+	}
+
+	public void setSmobile(String smobile) {
+		this.smobile = smobile;
+	}
+
+	public Set<Course> getCourseList() {
+		return courselist;
+	}
+
+	public void setCourseList(Set<Course> courseList) {
+		this.courselist = courseList;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [sid=" + sid + ", sname=" + sname + ", smobile=" + smobile + ", courselist=" + courselist + "]";
+	}
+	 public Student()
+	    {
+	    	super();
+	    }
+	    
+	    public Student(int sid,String sname,String smobile)
+	    {
+	    	super();
+	    	this.sid=sid;
+	    	this.sname=sname;
+	    	this.smobile=smobile;
+	    	
+	    }
+
+    
+ 
+}
